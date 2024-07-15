@@ -118,6 +118,7 @@ if __name__ == "__main__":
         entry_points={
             "console_scripts": ("pyinfra=pyinfra_cli.__main__:execute_pyinfra",),
             "pyinfra.connectors": [
+                "appjail = pyinfra.connectors.appjail:AppJailConnector",
                 "chroot = pyinfra.connectors.chroot:ChrootConnector",
                 "docker = pyinfra.connectors.docker:DockerConnector",
                 "local = pyinfra.connectors.local:LocalConnector",
