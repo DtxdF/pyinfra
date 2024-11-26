@@ -106,7 +106,7 @@ def service(
     elif state == ServiceStates.SRV_CUSTOM:
         args.append(QuoteString(srvname))
 
-        if not isinstance(command, str):
+        if isinstance(command, str):
             command = [command]
 
         args.extend((QuoteString(c) for c in command))
