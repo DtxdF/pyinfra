@@ -89,19 +89,19 @@ def service(
             host.noop(f"Service '{srvname}' already started")
             return
 
-        args.extend([srvname, "start"])
+        args.extend([QuoteString(srvname), "start"])
 
     elif state == ServiceStates.SRV_STOPPED:
         if not host.get_fact(ServiceStatus, srvname=srvname, jail=jail):
             host.noop(f"Service '{srvname}' already stopped")
             return
 
-        args.extend([srvname, "stop"])
+        args.extend([QuoteString(srvname), "stop"])
     elif state == ServiceStates.SRV_RESTARTED:
-        args.extend([srvname, "restart"])
+        args.extend([QuoteString(srvname), "restart"])
 
     elif state == ServiceStates.SRV_RELOADED:
-        args.extend([srvname, "reload"])
+        args.extend([QuoteString(srvname), "reload"])
 
     elif state == ServiceStates.SRV_CUSTOM:
         args.append(QuoteString(srvname))

@@ -82,7 +82,7 @@ def upgrade(jail: Optional[str] = None, force: bool = False, reponame: Optional[
         args.append("-f")
 
     if reponame is not None:
-        args.extend(["-r", reponame])
+        args.extend(["-r", QuoteString(reponame)])
 
     yield StringCommand(*args)
 
@@ -115,7 +115,7 @@ def install(package: str, jail: Optional[str] = None, reponame: Optional[str] = 
     args.extend(["install", "-y"])
 
     if reponame is not None:
-        args.extend(["-r", reponame])
+        args.extend(["-r", QuoteString(reponame)])
 
     args.extend(["--", QuoteString(package)])
 
