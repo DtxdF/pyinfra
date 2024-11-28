@@ -72,7 +72,9 @@ def service(
         host.noop(f"Cannot find rc(8) script '{srvname}'")
         return
 
-    args = ["service"]
+    args: List[Union[str, "QuoteString"]] = []
+
+    args.append("service")
 
     if verbose:
         args.append("-v")
@@ -106,10 +108,11 @@ def service(
     elif state == ServiceStates.SRV_CUSTOM:
         args.append(QuoteString(srvname))
 
-        if isinstance(command, str):
-            command = [command]
+        if command is not None:
+            if isinstance(command, str):
+                command = [command]
 
-        args.extend((QuoteString(c) for c in command))
+            args.extend([QuoteString(c) for c in command])
 
     else:
         raise OperationValueError("Invalid service command!")

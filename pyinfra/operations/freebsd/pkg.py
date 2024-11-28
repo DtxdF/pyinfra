@@ -4,7 +4,7 @@ Manage FreeBSD packages.
 
 from __future__ import annotations
 
-from typing_extensions import Optional
+from typing_extensions import List, Optional, Union
 
 from pyinfra import host
 from pyinfra.api import QuoteString, StringCommand, operation
@@ -33,7 +33,9 @@ def update(jail: Optional[str] = None, force: bool = False, reponame: Optional[s
         )
     """
 
-    args = ["pkg"]
+    args: List[Union[str, "QuoteString"]] = []
+
+    args.append("pkg")
 
     if jail is not None:
         args.extend(["-j", QuoteString(jail)])
@@ -71,7 +73,9 @@ def upgrade(jail: Optional[str] = None, force: bool = False, reponame: Optional[
         )
     """
 
-    args = ["pkg"]
+    args: List[Union[str, "QuoteString"]] = []
+
+    args.append("pkg")
 
     if jail is not None:
         args.extend(["-j", QuoteString(jail)])
@@ -107,7 +111,9 @@ def install(package: str, jail: Optional[str] = None, reponame: Optional[str] = 
         host.noop(f"Package '{package}' already installed")
         return
 
-    args = ["pkg"]
+    args: List[Union[str, "QuoteString"]] = []
+
+    args.append("pkg")
 
     if jail is not None:
         args.extend(["-j", QuoteString(jail)])
@@ -141,7 +147,9 @@ def remove(package: str, jail: Optional[str] = None):
         host.noop(f"Package '{package}' cannot be found")
         return
 
-    args = ["pkg"]
+    args: List[Union[str, "QuoteString"]] = []
+
+    args.append("pkg")
 
     if jail is not None:
         args.extend(["-j", QuoteString(jail)])
@@ -167,7 +175,9 @@ def autoremove(jail: Optional[str] = None):
         pkg.autoremove()
     """
 
-    args = ["pkg"]
+    args: List[Union[str, "QuoteString"]] = []
+
+    args.append("pkg")
 
     if jail is not None:
         args.extend(["-j", QuoteString(jail)])
@@ -194,7 +204,9 @@ def clean(all_pkg: bool = False, jail: Optional[str] = None):
         )
     """
 
-    args = ["pkg"]
+    args: List[Union[str, "QuoteString"]] = []
+
+    args.append("pkg")
 
     if jail is not None:
         args.extend(["-j", QuoteString(jail)])

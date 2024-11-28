@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from enum import Enum
 
-from typing_extensions import Optional
+from typing_extensions import List, Optional, Union
 
 from pyinfra import host
 from pyinfra.api import QuoteString, StringCommand, operation
@@ -59,7 +59,9 @@ def sysrc(
         )
     """
 
-    args = ["sysrc", "-i"]
+    args: List[Union[str, "QuoteString"]] = []
+
+    args.extend(["sysrc", "-i"])
 
     if command == SysrcCommands.SYSRC_DEL:
         sign = "="

@@ -4,7 +4,7 @@ Fetch and install binary updates to FreeBSD.
 
 from __future__ import annotations
 
-from typing_extensions import Optional
+from typing_extensions import List, Optional, Union
 
 from pyinfra.api import QuoteString, StringCommand, operation
 
@@ -40,7 +40,9 @@ def update(
         freebsd_update.update()
     """
 
-    args = ["PAGER=cat", "freebsd-update", "--not-running-from-cron"]
+    args: List[Union[str, "QuoteString"]] = []
+
+    args.extend(["PAGER=cat", "freebsd-update", "--not-running-from-cron"])
 
     if force:
         args.append("-F")
